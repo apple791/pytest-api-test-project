@@ -1,0 +1,43 @@
+# 在yaml文件里标记单个用例smoke
+import pytest
+from common.request_util import send_get_request, send_post_request
+from common.yaml_util import load_case_data
+from common.assert_util import assert_create_post_response, assert_get_posts_by_user_id_response
+from common.case_util import build_pytest_params
+
+case_data = load_case_data("posts_api_cases.yaml")
+
+# post_cases 创建文章
+post_cases = case_data["post_cases"]
+# get_cases 查询文章
+get_cases = case_data["get_cases"]
+
+post_params = build_pytest_params(post_cases)
+get_params = build_pytest_params(get_cases)
+
+@pytest.mark.parametrize(
+    "case",
+    post_params
+)
+def test_create_post(posts_url, case):
+    payload = case["payload"]
+    expected = case["expected"]
+
+    response = send_post_request(posts_url, payload=payload)
+
+    assert_create_post_response(response, expected)
+
+@pytest.mark.parametrize(
+    "case",
+    get_params
+)
+def test_get_posts_by_user_id(posts_url, case):
+    params = case["params"]
+    expected = case["expected"]
+
+    list_response = send_get_request(posts_url, params=params)
+
+    assert_get_posts_by_user_id_response(list_response, expected)
+
+
+
