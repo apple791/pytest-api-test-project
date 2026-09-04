@@ -38,7 +38,9 @@ api_test_project/
 │   ├── test_post_flow_api.py
 │   ├── test_negative_api.py
 │   ├── test_headers_api.py
-│   └── test_auth_api.py
+│   ├── test_auth_api.py
+│   ├── test_marker_demo.py
+│   └── test_session_api.py
 ├── pytest.ini
 ├── requirements.txt
 ├── .gitignore
@@ -54,6 +56,8 @@ api_test_project/
 - 请求不存在接口路径的异常场景
 - 自定义 headers 发送与校验
 - Bearer Token 鉴权成功/失败场景
+- Session 自动保存服务端返回的 Cookie，并在后续请求中自动携带
+- 断言失败时打印响应日志，辅助定位问题
 
 
 ## 运行前准备
@@ -109,8 +113,9 @@ reports/report.html
 ## 配置说明
 
 - `reports/` 目录用于保存本地测试报告，默认不提交到代码仓库。
-- 接口基础地址统一维护在 `config/config.py` 中。
+- 接口基础地址和 httpbin 测试地址统一维护在 `config/config.py` 中。
 - 测试数据统一维护在 `data/posts_api_cases.yaml` 中。
+- `test_marker_demo.py` 用于练习 pytest marker 和 smoke 单用例标记方式。
 
 
 ## 项目提交前检查
@@ -135,6 +140,10 @@ reports/report.html
 - D8: Headers 与 Bearer 鉴权测试
 - D9: pytest marker 与冒烟测试 smoke
 - D10: pytest 运行命令、HTML 报告与项目文件管理
+- D11: README 整理与 GitHub 首次上传
+- D12: requests Session 与 Cookie 基础
+- D13: 统一请求封装升级，支持普通请求和 Session 请求
+- D14: 响应日志与失败排查增强
 
 
 
