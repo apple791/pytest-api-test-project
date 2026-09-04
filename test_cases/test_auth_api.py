@@ -2,14 +2,14 @@
 import os
 import pytest
 from common.request_util import send_get_request
-from common.yaml_util import load_yaml
+from common.yaml_util import load_case_data
 from common.assert_util import assert_bearer_response
 
-current_dir = os.path.dirname(__file__)
-project_root = os.path.dirname(current_dir)
-case_file = os.path.join(project_root, "data", "posts_api_cases.yaml")
+# current_dir = os.path.dirname(__file__)
+# project_root = os.path.dirname(current_dir)
+# case_file = os.path.join(project_root, "data", "posts_api_cases.yaml")
 
-case_data = load_yaml(case_file)
+case_data = load_case_data("posts_api_cases.yaml")
 assert case_data is not None, "YAML文件为空或读取失败"
 bearer_cases = case_data["bearer_cases"]
 bearer_ids = [case["case_name"] for case in bearer_cases]

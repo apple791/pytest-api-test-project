@@ -15,7 +15,7 @@ post_cases:
 
 
   - case_name: "正常创建文章-用户2"
-    marks: regression
+    marks: []
     payload:
       title: "second case"
       body: "hello yaml"
@@ -40,7 +40,7 @@ get_cases:
       not_empty: true
 
   - case_name: "查询用户2文章"
-    marks: regression
+    marks: []
     params:
       userId: 2
     expected:
@@ -151,3 +151,13 @@ bearer_cases:
     headers: null
     expected:
       status_code: 401
+
+# Session + Cookie 用例 YAML 参数化。
+session_cases:
+  - case_name: "服务端设置Cookie后Session自动保存"
+    cookie_name: "session_id"
+    cookie_value:  "abc123"
+    expected:
+      status_code: 200
+      cookie_name: "session_id"
+      cookie_value: "abc123"

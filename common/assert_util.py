@@ -1,3 +1,5 @@
+from common.request_util import print_response_info
+
 def assert_create_post_response(response, expected):
     assert response is not None, f"接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -109,6 +111,31 @@ def assert_bearer_response(response, expected):
     assert data.get("token") == expected["token"]
 
     return data
+
+def assert_session_api_response(response, expected):
+
+    assert response is not None, "接口请求失败，response为None"
+    assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
+
+    data = response.json()
+    cookies = data.get("cookies")
+
+    assert cookies is not None, "响应中缺少cookies字段"
+
+    cookie_name = expected["cookie_name"]
+    cookie_value = expected["cookie_value"]
+    assert cookies.get(cookie_name) == cookie_value, f"{cookie_name}不一致"
+
+    return data
+
+
+def assert_session_with_log(response, expected):
+    try:
+        assert_session_api_response(response, expected)
+    except AssertionError:
+        print_response_info(response, debug=True)
+        raise
+
 
 
 

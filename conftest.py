@@ -1,5 +1,6 @@
 import pytest
-from config.config import BASE_URL, HEADERS_URL, BEARER_URL
+import requests
+from config.config import BASE_URL, HEADERS_URL, BEARER_URL, COOKIES_URL
 
 @pytest.fixture
 def posts_url():
@@ -16,3 +17,12 @@ def headers_url():
 @pytest.fixture
 def bearer_url():
     return BEARER_URL
+
+@pytest.fixture
+def cookies_url():
+    return COOKIES_URL
+
+@pytest.fixture
+def api_session():
+    session = requests.Session()
+    return session
