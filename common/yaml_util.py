@@ -5,8 +5,9 @@ def load_yaml(file_path):
     with open(file_path, "r", encoding='utf-8') as f:
         data = yaml.safe_load(f)
 
-    return data
 
+    return data
+#？"posts_api_cases.yaml"是否该为file_name
 def load_case_data(file_name):
     current_dir = os.path.dirname(__file__)
     project_root = os.path.dirname(current_dir)

@@ -65,6 +65,7 @@ flow_cases:
     params:
       userId: 1
     expected:
+      userId: 1
       list_status_code: 200
       detail_status_code: 200
       data_type: "list"
@@ -78,6 +79,7 @@ flow_cases:
     params:
       userId: 2
     expected:
+      userId: 2
       list_status_code: 200
       detail_status_code: 200
       data_type: "list"
@@ -90,6 +92,7 @@ flow_cases:
     params:
       userId: 3
     expected:
+      userId: 3
       list_status_code: 200
       detail_status_code: 200
       data_type: "list"
@@ -161,3 +164,28 @@ session_cases:
       status_code: 200
       cookie_name: "session_id"
       cookie_value: "abc123"
+
+
+# 请求失败重试用例
+retry_cases:
+  - case_name: "500状态码触发重试"
+    url: "https://httpbin.org/status/500"
+    retry_times: 3
+    retry_status_codes:
+      - 500
+      - 502
+      - 503
+      - 504
+    expected:
+      status_code: 500
+
+  - case_name: "404状态码不触发重试"
+    url: "https://httpbin.org/status/404"
+    retry_times: 3
+    retry_status_codes:
+      - 500
+      - 502
+      - 503
+      - 504
+    expected:
+      status_code: 404

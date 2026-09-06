@@ -8,7 +8,7 @@
 import pytest
 from common.yaml_util import load_case_data, get_case_ids
 from common.request_util import send_get_request
-from common.assert_util import assert_session_with_log
+from common.assert_util import assert_session_api_response, assert_with_log
 
 
 case_data = load_case_data("posts_api_cases.yaml")
@@ -34,7 +34,7 @@ def test_session_save_cookie_from_response(api_session, cookies_url, case):
 
     cookies_response = send_get_request(cookies_url, session=api_session, timeout=5)
 
-    assert_session_with_log(cookies_response, expected)
+    assert_with_log(assert_session_api_response, cookies_response, expected)
 
 
 

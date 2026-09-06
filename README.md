@@ -40,7 +40,8 @@ api_test_project/
 │   ├── test_headers_api.py
 │   ├── test_auth_api.py
 │   ├── test_marker_demo.py
-│   └── test_session_api.py
+│   ├── test_session_api.py
+│   └── test_retry_api.py
 ├── pytest.ini
 ├── requirements.txt
 ├── .gitignore
@@ -58,6 +59,7 @@ api_test_project/
 - Bearer Token 鉴权成功/失败场景
 - Session 自动保存服务端返回的 Cookie，并在后续请求中自动携带
 - 断言失败时打印响应日志，辅助定位问题
+- - 请求异常或指定状态码时的重试机制测试
 
 
 ## 运行前准备

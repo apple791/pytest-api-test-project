@@ -2,7 +2,7 @@
 import os
 import pytest
 from common.request_util import send_get_request
-from common.assert_util import assert_posts_list_response, assert_post_detail_response
+from common.assert_util import assert_posts_list_response, assert_post_detail_response, assert_with_log
 from common.yaml_util import load_yaml
 
 current_dir = os.path.dirname(__file__)
@@ -21,9 +21,10 @@ def test_get_post_detail_by_list_first_id(posts_url, case):
     expected = case["expected"]
     list_response = send_get_request(posts_url, params=params)
 
-    first_post = assert_posts_list_response(
+    first_post = assert_with_log(
+        assert_posts_list_response,
         list_response,
-        expected_user_id=params["userId"],
+        expected_user_id=expected["userId"],
         expected=expected
     )
 
@@ -33,7 +34,8 @@ def test_get_post_detail_by_list_first_id(posts_url, case):
 
     detail_response = send_get_request(detail_url)
 
-    assert_post_detail_response(
+    assert_with_log(
+        assert_post_detail_response,
         detail_response,
         expected_post_id=post_id,
         expected=expected

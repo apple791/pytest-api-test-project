@@ -1,7 +1,11 @@
 import pytest
 from common.request_util import send_get_request, send_post_request
 from common.yaml_util import load_case_data, get_case_ids
-from common.assert_util import assert_create_post_response, assert_get_posts_by_user_id_response
+from common.assert_util import (
+    assert_create_post_response,
+    assert_get_posts_by_user_id_response,
+    assert_with_log
+)
 
 case_data = load_case_data("posts_api_cases.yaml")
 
@@ -24,7 +28,11 @@ def test_create_post(posts_url, case):
 
     response = send_post_request(posts_url, payload=payload)
 
-    assert_create_post_response(response, expected)
+    assert_with_log(
+        assert_create_post_response,
+        response,
+        expected
+    )
 
 @pytest.mark.smoke
 @pytest.mark.parametrize(
@@ -38,5 +46,9 @@ def test_get_posts_by_user_id(posts_url, case):
 
     list_response = send_get_request(posts_url, params=params)
 
-    assert_get_posts_by_user_id_response(list_response, expected)
+    assert_with_log(
+        assert_get_posts_by_user_id_response,
+        list_response,
+        expected
+    )
 

@@ -1,7 +1,7 @@
 from common.request_util import print_response_info
 
 def assert_create_post_response(response, expected):
-    assert response is not None, f"接口请求失败，response为None"
+    assert response is not None, "接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
 
     data = response.json()
@@ -129,9 +129,9 @@ def assert_session_api_response(response, expected):
     return data
 
 
-def assert_session_with_log(response, expected):
+def assert_with_log(assert_func, response, *args, **kwargs):
     try:
-        assert_session_api_response(response, expected)
+        return assert_func(response, *args, **kwargs)
     except AssertionError:
         print_response_info(response, debug=True)
         raise
