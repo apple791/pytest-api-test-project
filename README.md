@@ -39,7 +39,6 @@ api_test_project/
 │   ├── test_negative_api.py
 │   ├── test_headers_api.py
 │   ├── test_auth_api.py
-│   ├── test_marker_demo.py
 │   ├── test_session_api.py
 │   └── test_retry_api.py
 ├── pytest.ini
@@ -59,7 +58,7 @@ api_test_project/
 - Bearer Token 鉴权成功/失败场景
 - Session 自动保存服务端返回的 Cookie，并在后续请求中自动携带
 - 断言失败时打印响应日志，辅助定位问题
-- - 请求异常或指定状态码时的重试机制测试
+- 请求异常或指定状态码时的重试机制测试
 
 
 ## 运行前准备
@@ -117,8 +116,6 @@ reports/report.html
 - `reports/` 目录用于保存本地测试报告，默认不提交到代码仓库。
 - 接口基础地址和 httpbin 测试地址统一维护在 `config/config.py` 中。
 - 测试数据统一维护在 `data/posts_api_cases.yaml` 中。
-- `test_marker_demo.py` 用于练习 pytest marker 和 smoke 单用例标记方式。
-
 
 ## 项目提交前检查
 
@@ -146,6 +143,11 @@ reports/report.html
 - D12: requests Session 与 Cookie 基础
 - D13: 统一请求封装升级，支持普通请求和 Session 请求
 - D14: 响应日志与失败排查增强
+- D15: README 更新与 GitHub 二次提交
+- D16: 学习 `*args` / `**kwargs`，封装通用断言日志函数
+- D17: 学习接口请求异常重试机制
+- D18: 学习按指定状态码触发重试，并使用 YAML 管理重试用例
+- D19: 测试用例分层整理，统一 marker、测试文件注释和工具函数使用
 
 
 

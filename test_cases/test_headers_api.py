@@ -1,17 +1,14 @@
+# Headers 测试：发送自定义请求头，并校验服务端是否收到
 import pytest
-import os
 from common.request_util import send_get_request
 from common.assert_util import assert_headers_response
-from common.yaml_util import load_yaml
+from common.yaml_util import load_case_data, get_case_ids
 
-current_dir = os.path.dirname(__file__)
-project_root = os.path.dirname(current_dir)
-case_file = os.path.join(project_root, "data", "posts_api_cases.yaml")
+pytestmark = pytest.mark.headers
 
-case_data = load_yaml(case_file)
-assert case_data is not None, "YAML文件为空或读取失败"
+case_data = load_case_data("posts_api_cases.yaml")
 headers_cases = case_data["headers_cases"]
-headers_ids = [case["case_name"] for case in headers_cases]
+headers_ids = get_case_ids(headers_cases)
 
 @pytest.mark.parametrize(
     "case",

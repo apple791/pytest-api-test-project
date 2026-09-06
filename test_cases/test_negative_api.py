@@ -1,21 +1,17 @@
-import os
+# 异常场景测试：查询不存在的文章 ID，以及请求不存在的接口路径
 import pytest
 from common.request_util import send_get_request
-from common.yaml_util import load_yaml
+from common.yaml_util import load_case_data, get_case_ids
 from common.assert_util import assert_not_found_response
 
-current_dir = os.path.dirname(__file__)
-project_root = os.path.dirname(current_dir)
-case_file = os.path.join(project_root, "data", "posts_api_cases.yaml")
+pytestmark = pytest.mark.negative
 
-case_data = load_yaml(case_file)
+data_cases = load_case_data("posts_api_cases.yaml")
+negative_cases = data_cases["negative_cases"]
+negative_ids = get_case_ids(negative_cases)
 
-assert case_data is not None, "YAML文件为空或读取失败"
-negative_cases = case_data["negative_cases"]
-negative_ids = [case["case_name"] for case in negative_cases]
-
-wrong_path_cases = case_data["wrong_path_cases"]
-wrong_path_ids = [case["case_name"] for case in wrong_path_cases]
+wrong_path_cases = data_cases["wrong_path_cases"]
+wrong_path_ids = get_case_ids(wrong_path_cases)
 
 @pytest.mark.parametrize(
     "case",

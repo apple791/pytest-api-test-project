@@ -1,6 +1,8 @@
+# 文章接口基础测试：创建文章、按用户 ID 查询文章列表
 import pytest
 from common.request_util import send_get_request, send_post_request
-from common.yaml_util import load_case_data, get_case_ids
+from common.yaml_util import load_case_data
+from common.case_util import build_pytest_params
 from common.assert_util import (
     assert_create_post_response,
     assert_get_posts_by_user_id_response,
@@ -9,18 +11,15 @@ from common.assert_util import (
 
 case_data = load_case_data("posts_api_cases.yaml")
 
-# post_cases 创建文章
 post_cases = case_data["post_cases"]
-# get_cases 查询文章
 get_cases = case_data["get_cases"]
-post_ids = get_case_ids(post_cases)
-get_ids = get_case_ids(get_cases)
 
-@pytest.mark.smoke
+post_params = build_pytest_params(post_cases)
+get_params = build_pytest_params(get_cases)
+
 @pytest.mark.parametrize(
     "case",
-    post_cases,
-    ids=post_ids
+    post_params
 )
 def test_create_post(posts_url, case):
     payload = case["payload"]
@@ -34,11 +33,9 @@ def test_create_post(posts_url, case):
         expected
     )
 
-@pytest.mark.smoke
 @pytest.mark.parametrize(
     "case",
-    get_cases,
-    ids=get_ids
+    get_params
 )
 def test_get_posts_by_user_id(posts_url, case):
     params = case["params"]
@@ -51,4 +48,6 @@ def test_get_posts_by_user_id(posts_url, case):
         list_response,
         expected
     )
+
+
 

@@ -1,15 +1,10 @@
-# 设置 Cookie
-# ↓
-# 访问 cookies 接口
-# ↓
-# 断言服务端确实收到了 Cookie
-
-
+# Session 与 Cookie 测试：验证 Session 自动保存并携带服务端返回的 Cookie
 import pytest
 from common.yaml_util import load_case_data, get_case_ids
 from common.request_util import send_get_request
 from common.assert_util import assert_session_api_response, assert_with_log
 
+pytestmark = pytest.mark.session
 
 case_data = load_case_data("posts_api_cases.yaml")
 session_cases = case_data["session_cases"]

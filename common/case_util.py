@@ -8,7 +8,7 @@ def build_pytest_params(cases):
         case_name = case["case_name"]
         marks = case.get("marks", [])
 
-        pytest_marks = [] # 每次运行后pytest_marks被重置为空列表，每条 case 单独准备自己的 pytest 标记列表
+        pytest_marks = [] # 每条 case 单独准备自己的 pytest 标记列表
 
         if "smoke" in marks:
             pytest_marks.append(pytest.mark.smoke)

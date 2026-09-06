@@ -1,3 +1,4 @@
+# 1.文章创建接口用例
 post_cases:
   - case_name: "正常创建文章-用户1"
     marks:
@@ -13,7 +14,6 @@ post_cases:
       userId: 1
       has_id: true
 
-
   - case_name: "正常创建文章-用户2"
     marks: []
     payload:
@@ -27,6 +27,8 @@ post_cases:
       userId: 2
       has_id: true
 
+
+# 2.根据用户 ID 查询文章列表接口用例
 get_cases:
   - case_name: "查询用户1文章"
     marks:
@@ -60,6 +62,8 @@ get_cases:
       data_type: "list"
       not_empty: true
 
+
+# 3.文章接口流程用例：先查询文章列表，再提取第一篇文章 ID 查询详情
 flow_cases:
   - case_name: "查询用户1文章列表并查看第一篇详情"
     params:
@@ -73,7 +77,6 @@ flow_cases:
       required_fields:
         - "title"
         - "body"
-
 
   - case_name: "查询用户2文章列表并查看第一篇详情"
     params:
@@ -101,6 +104,8 @@ flow_cases:
         - "title"
         - "body"
 
+
+# 4.查询不存在文章 ID 的异常用例
 negative_cases:
   - case_name: "查询不存在文章id-999999"
     post_id: 999999
@@ -120,6 +125,8 @@ negative_cases:
       status_code: 404
       response_body: {}
 
+
+# 5.请求不存在接口路径的异常用例
 wrong_path_cases:
   - case_name: "请求不存在接口路径"
     path: "/wrong_api"
@@ -127,7 +134,8 @@ wrong_path_cases:
       status_code: 404
       response_body: {}
 
-# 校验服务端是否收到自定义 headers
+
+# 6.Headers 测试用例：校验服务端是否收到自定义 headers
 headers_cases:
   - case_name: "发送自定义headers"
     headers:
@@ -139,7 +147,8 @@ headers_cases:
         User-Agent: "api-test-demo"
         Authorization: "Bearer fake-token"
 
-# 校验 Bearer 鉴权成功/失败
+
+# 7.Bearer Token 鉴权用例：覆盖携带 Token 成功和未携带 Token 失败
 bearer_cases:
   - case_name: "带Authorization预期成功"
     headers:
@@ -155,18 +164,19 @@ bearer_cases:
     expected:
       status_code: 401
 
-# Session + Cookie 用例 YAML 参数化。
+
+# 8.Session + Cookie 用例：验证 Session 自动保存并携带服务端返回的 Cookie
 session_cases:
   - case_name: "服务端设置Cookie后Session自动保存"
     cookie_name: "session_id"
-    cookie_value:  "abc123"
+    cookie_value: "abc123"
     expected:
       status_code: 200
       cookie_name: "session_id"
       cookie_value: "abc123"
 
 
-# 请求失败重试用例
+# 9.请求失败重试用例：验证指定状态码是否触发重试
 retry_cases:
   - case_name: "500状态码触发重试"
     url: "https://httpbin.org/status/500"

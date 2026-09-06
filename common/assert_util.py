@@ -1,5 +1,6 @@
 from common.request_util import print_response_info
 
+# 校验创建文章接口响应
 def assert_create_post_response(response, expected):
     assert response is not None, "接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -15,6 +16,7 @@ def assert_create_post_response(response, expected):
 
     return data
 
+# 校验按用户 ID 查询文章列表接口响应
 def assert_get_posts_by_user_id_response(response, expected):
     assert response is not None, f"接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -33,6 +35,7 @@ def assert_get_posts_by_user_id_response(response, expected):
 
     return data
 
+# 校验文章列表响应，并返回第一篇文章数据，用于后续详情接口关联
 def assert_posts_list_response(response, expected_user_id, expected):
     assert response is not None, "查询文章列表接口失败"
     assert response.status_code == expected["list_status_code"], f"状态码错误：{response.status_code}"
@@ -53,6 +56,7 @@ def assert_posts_list_response(response, expected_user_id, expected):
 
     return first_post
 
+# 校验文章详情接口响应
 def assert_post_detail_response(response, expected_post_id, expected):
     assert response is not None, "查询文章详情接口请求失败"
     assert response.status_code == expected["detail_status_code"], f"状态码错误：{response.status_code}"
@@ -66,7 +70,7 @@ def assert_post_detail_response(response, expected_post_id, expected):
 
     return data
 
-# 两个函数合并
+# 校验 404 响应，适用于不存在文章 ID 和错误接口路径
 def assert_not_found_response(response, expected):
     assert response is not None, "接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -78,7 +82,7 @@ def assert_not_found_response(response, expected):
 
     return data
 
-# 校验服务端是否收到自定义 headers  test_headers_api.py
+# 校验服务端是否收到自定义 headers
 def assert_headers_response(response, expected):
     assert response is not None, "接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -97,7 +101,7 @@ def assert_headers_response(response, expected):
 
     return data
 
-# 校验 Bearer  鉴权成功/失败 test_auth_api.py
+# 校验 Bearer  鉴权成功/失败响应
 def assert_bearer_response(response, expected):
     assert response is not None, f"接口请求失败，response为None"
     assert response.status_code == expected["status_code"], f"状态码错误：{response.status_code}"
@@ -112,6 +116,7 @@ def assert_bearer_response(response, expected):
 
     return data
 
+# 校验 Session 是否自动保存并携带 Cookie
 def assert_session_api_response(response, expected):
 
     assert response is not None, "接口请求失败，response为None"
@@ -128,7 +133,7 @@ def assert_session_api_response(response, expected):
 
     return data
 
-
+# 包装断言函数：断言失败时打印响应日志
 def assert_with_log(assert_func, response, *args, **kwargs):
     try:
         return assert_func(response, *args, **kwargs)

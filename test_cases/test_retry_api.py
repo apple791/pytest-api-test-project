@@ -1,6 +1,9 @@
+# 请求重试测试：验证请求异常或指定状态码时的重试机制
 import pytest
 from common.yaml_util import load_case_data, get_case_ids
 from common.request_util import send_get_request_with_retry
+
+pytestmark = pytest.mark.retry
 
 case_data = load_case_data("posts_api_cases.yaml")
 retry_cases = case_data["retry_cases"]

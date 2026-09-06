@@ -1,20 +1,20 @@
-# 查询用户文章列表并查看第一篇详情
-import os
+# 文章接口流程测试：查询文章列表后提取第一篇文章 ID，再查询文章详情
 import pytest
 from common.request_util import send_get_request
 from common.assert_util import assert_posts_list_response, assert_post_detail_response, assert_with_log
-from common.yaml_util import load_yaml
+from common.yaml_util import load_case_data, get_case_ids
 
-current_dir = os.path.dirname(__file__)
-project_root = os.path.dirname(current_dir)
-case_file = os.path.join(project_root,"data","posts_api_cases.yaml")
+pytestmark = pytest.mark.flow
 
-case_data = load_yaml(case_file)
-assert case_data is not None, "YAML文件为空或读取失败"
+case_data = load_case_data("posts_api_cases.yaml")
 flow_cases = case_data["flow_cases"]
-flow_ids = [case["case_name"] for case in flow_cases]
+flow_ids = get_case_ids(flow_cases)
 
-@pytest.mark.parametrize("case", flow_cases, ids=flow_ids)
+@pytest.mark.parametrize(
+    "case",
+    flow_cases,
+    ids=flow_ids
+)
 def test_get_post_detail_by_list_first_id(posts_url, case):
 
     params = case["params"]
