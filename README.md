@@ -102,6 +102,13 @@ pytest -m smoke
 pytest --html=reports/report.html --self-contained-html
 ```
 
+### 生成 Allure 原始结果
+
+```bash
+pytest --alluredir=reports/allure-results --clean-alluredir
+```
+
+
 ## 测试报告
 
 报告生成路径：

@@ -1,4 +1,5 @@
 # Bearer Token 鉴权测试：覆盖携带 Token 成功和未携带 Token 失败场景
+import allure
 import pytest
 from common.request_util import send_get_request
 from common.yaml_util import load_case_data, get_case_ids
@@ -10,6 +11,9 @@ case_data = load_case_data("posts_api_cases.yaml")
 bearer_cases = case_data["bearer_cases"]
 bearer_ids = get_case_ids(bearer_cases)
 
+@allure.feature("鉴权接口")
+@allure.story("Bearer Token 鉴权")
+@allure.title("{case[case_name]}")
 @pytest.mark.parametrize(
     "case",
     bearer_cases,
