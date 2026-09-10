@@ -5,3 +5,4 @@ __pycache__/
 reports/
 .idea/
 .ignore_smoke_practice.py
+*.db

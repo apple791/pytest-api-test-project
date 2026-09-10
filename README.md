@@ -28,7 +28,8 @@ api_test_project/
 │   ├── request_util.py
 │   ├── yaml_util.py
 │   ├── assert_util.py
-│   └── case_util.py
+│   ├── case_util.py
+│   └── db_util.py
 ├── config/
 │   └── config.py
 ├── data/
@@ -39,8 +40,9 @@ api_test_project/
 │   ├── test_negative_api.py
 │   ├── test_headers_api.py
 │   ├── test_auth_api.py
-│   ├── test_session_api.py
-│   └── test_retry_api.py
+│   ├── test_session_api.
+│   ├── test_retry_api.py
+│   └── test_db_api.py
 ├── pytest.ini
 ├── requirements.txt
 ├── .gitignore
@@ -157,6 +159,9 @@ reports/report.html
 - D19: 测试用例分层整理，统一 marker、测试文件注释和工具函数使用
 - D20: 学习 Allure 测试报告，完成 Allure 在接口自动化测试项目中的初步接入
 - D21: 学习 Allure step 和 attach，增强测试报告中的步骤与请求/响应信息展示
+- D22: SQL 强化——子查询、CTE 与异常数据排查
+- D23: SQL 字符串函数专项
+- D24: Python 连接 SQLite 数据库，封装数据库查询工具，并在 pytest 中执行数据库查询测试
 
 
 
