@@ -1,5 +1,6 @@
 from common.db_util import query_db
 
+
 def test_query_users():
     sql = "select * from users WHERE id = ?"
 

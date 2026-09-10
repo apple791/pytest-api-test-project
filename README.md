@@ -42,6 +42,7 @@ api_test_project/
 │   ├── test_auth_api.py
 │   ├── test_session_api.
 │   ├── test_retry_api.py
+│   ├── test_api_db_check.py
 │   └── test_db_api.py
 ├── pytest.ini
 ├── requirements.txt
@@ -61,6 +62,7 @@ api_test_project/
 - Session 自动保存服务端返回的 Cookie，并在后续请求中自动携带
 - 断言失败时打印响应日志，辅助定位问题
 - 请求异常或指定状态码时的重试机制测试
+- 接口响应数据与 SQLite 数据库数据一致性校验
 
 
 ## 运行前准备
@@ -162,6 +164,7 @@ reports/report.html
 - D22: SQL 强化——子查询、CTE 与异常数据排查
 - D23: SQL 字符串函数专项
 - D24: Python 连接 SQLite 数据库，封装数据库查询工具，并在 pytest 中执行数据库查询测试
+- D25: 接口自动化结合 SQLite 数据库校验，完成接口响应与数据库数据一致性验证
 
 
 

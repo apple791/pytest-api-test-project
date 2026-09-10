@@ -199,3 +199,18 @@ retry_cases:
       - 504
     expected:
       status_code: 404
+
+api_db_cases:
+  - case_name: "接口返回用户1文章，数据库存在用户1"
+    params:
+      userId: 1
+    expected:
+      status_code: 200
+      db_user_exists: true
+
+  - case_name: "接口返回用户2文章，数据库存在用户2"
+    params:
+      userId: 2
+    expected:
+      status_code: 200
+      db_user_exists: true
