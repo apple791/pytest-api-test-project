@@ -27,26 +27,15 @@
 ```text
 api_test_project/
 ├── common/
-│   ├── request_util.py
-│   ├── yaml_util.py
-│   ├── assert_util.py
-│   ├── case_util.py
-│   └── db_util.py
 ├── config/
-│   └── config.py
 ├── data/
-│   └── posts_api_cases.yaml
+├── pages/
 ├── test_cases/
-│   ├── test_posts_api.py
-│   ├── test_post_flow_api.py
-│   ├── test_negative_api.py
-│   ├── test_headers_api.py
-│   ├── test_auth_api.py
-│   ├── test_session_api.
-│   ├── test_retry_api.py
-│   ├── test_api_db_check.py
-│   ├── test_selenium_ui.py
-│   └── test_db_api.py
+│   ├── api/
+│   ├── db/
+│   └── ui/
+├── reports/
+├── conftest.py
 ├── pytest.ini
 ├── requirements.txt
 ├── .gitignore
@@ -67,8 +56,7 @@ api_test_project/
 - 请求异常或指定状态码时的重试机制测试
 - 接口响应数据与 SQLite 数据库数据一致性校验
 - Selenium UI 自动化测试：填写页面表单并校验提交结果
-- Selenium UI 自动化测试：基于 Page Object Model 封装页面操作
-- Selenium UI 自动化测试：基于 BasePage + Page Object Model 封装页面操作
+- Selenium UI 自动化测试：使用 BasePage + Page Object Model 封装页面操作
 
 
 ## 运行前准备
@@ -91,6 +79,8 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+4. 如需查看 Allure 报告，请另外安装 Allure Commandline，并确保 `allure` 命令可以使用。
+
 
 ## 运行测试
 
@@ -98,6 +88,36 @@ pip install -r requirements.txt
 
 ```bash
 pytest
+```
+
+### 运行接口测试
+
+```bash
+pytest test_cases/api
+```
+
+### 运行数据库测试
+
+```bash
+pytest test_cases/db
+```
+
+### 运行 UI 测试
+
+```bash
+pytest test_cases/ui
+```
+
+### 运行 UI marker 测试
+
+```bash
+pytest -m ui
+```
+
+### 运行接口与数据库联合测试
+
+```bash
+pytest -m api_db
 ```
 
 ### 运行冒烟测试
@@ -127,12 +147,27 @@ pytest --alluredir=reports/allure-results --clean-alluredir
 reports/report.html
 ```
 
+### 查看 Allure 报告
+
+```bash
+allure serve reports/allure-results
+```
+
+### 生成静态报告
+
+```bash
+allure generate reports/allure-results -o reports/allure-report --clean
+```
+
+
 
 ## 配置说明
 
 - `reports/` 目录用于保存本地测试报告，默认不提交到代码仓库。
 - 接口基础地址和 httpbin 测试地址统一维护在 `config/config.py` 中。
 - 测试数据统一维护在 `data/posts_api_cases.yaml` 中。
+- pytest 会递归搜索 test_cases 目录下的 api、db 和 ui 子目录。
+- 接口、数据库和 UI 测试分别按功能分层管理。
 
 ## 项目提交前检查
 
@@ -173,7 +208,10 @@ reports/report.html
 - D25: 接口自动化结合 SQLite 数据库校验，完成接口响应与数据库数据一致性验证
 - D26: Selenium 入门，完成浏览器启动、元素定位、输入、点击、等待和 fixture 封装
 - D27: Selenium Page Object Model 入门，完成页面对象封装和 Allure 步骤展示
-- - D28: Selenium BasePage 基类封装，统一封装等待、点击、输入、获取文本等页面操作
+- D28: Selenium BasePage 基类封装，统一封装等待、点击、输入、获取文本等页面操作
+- D29: Selenium UI 测试失败自动截图，并将失败截图和页面源码添加到 Allure 报告
+- D30: Selenium UI 测试数据参数化，使用 YAML 管理多组输入场景，并校验页面实际输入值
+- D31: 接口、数据库和 UI 测试目录分层整理，完善 pytest.ini 配置和项目结构
 
 
 
