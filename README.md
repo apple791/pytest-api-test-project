@@ -68,6 +68,7 @@ api_test_project/
 - 接口响应数据与 SQLite 数据库数据一致性校验
 - Selenium UI 自动化测试：填写页面表单并校验提交结果
 - Selenium UI 自动化测试：基于 Page Object Model 封装页面操作
+- Selenium UI 自动化测试：基于 BasePage + Page Object Model 封装页面操作
 
 
 ## 运行前准备
@@ -172,6 +173,7 @@ reports/report.html
 - D25: 接口自动化结合 SQLite 数据库校验，完成接口响应与数据库数据一致性验证
 - D26: Selenium 入门，完成浏览器启动、元素定位、输入、点击、等待和 fixture 封装
 - D27: Selenium Page Object Model 入门，完成页面对象封装和 Allure 步骤展示
+- - D28: Selenium BasePage 基类封装，统一封装等待、点击、输入、获取文本等页面操作
 
 
 

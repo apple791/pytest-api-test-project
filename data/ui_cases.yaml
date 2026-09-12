@@ -1,0 +1,18 @@
+# Selenium Web Form UI 测试数据
+web_form_cases:
+  - case_name: "输入英文文本"
+    input_text: "pytest selenium"
+    expected_message: "Received!"
+
+  - case_name: "输入中文文本"
+    input_text: "接口自动化测试"
+    expected_message: "Received!"
+
+  - case_name: "输入数字文本"
+    input_text: "123456"
+    expected_message: "Received!"
+
+  - case_name: "输入空字符串"
+    input_text: ""
+    expected_message: "Received!"
+

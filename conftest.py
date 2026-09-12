@@ -1,3 +1,6 @@
+import os
+import allure
+from datetime import datetime
 import pytest
 import requests
 from config.config import BASE_URL, HEADERS_URL, BEARER_URL, COOKIES_URL
@@ -49,10 +52,45 @@ def init_db():
 
 # 创建浏览器实例，用于Selenium UI自动化测试
 @pytest.fixture
-def browser():
+def browser(request):
     driver = webdriver.Chrome()
     driver.maximize_window()
 
     yield driver
 
+    if hasattr(request.node, "rep_call") and request.node.rep_call.failed:
+        os.makedirs("reports/screenshots", exist_ok=True)
+
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        test_name = request.node.name.replace("/", "_")
+        screenshot_path = (
+            f"reports/screenshots/{test_name}_{timestamp}.png"
+        )
+
+        driver.save_screenshot(screenshot_path)
+
+        allure.attach(
+            driver.get_screenshot_as_png(),
+            name=f"{test_name}_失败截图",
+            attachment_type=allure.attachment_type.PNG
+        )
+
+        allure.attach(
+            driver.page_source,
+            name=f"{test_name}_页面源码",
+            attachment_type=allure.attachment_type.HTML
+        )
+
+        print(f"失败截图已保存：{screenshot_path}")
+
     driver.quit()
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call":
+        setattr(item, "rep_call",report)
+
