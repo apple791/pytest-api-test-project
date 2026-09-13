@@ -200,6 +200,8 @@ retry_cases:
     expected:
       status_code: 404
 
+
+# 10.SQLite 接口与数据库校验
 api_db_cases:
   - case_name: "接口返回用户1文章，数据库存在用户1"
     params:
@@ -214,3 +216,33 @@ api_db_cases:
     expected:
       status_code: 200
       db_user_exists: true
+
+
+# 11.MySQL 接口与数据库校验
+api_mysql_cases:
+  - case_name: "用户1存在于MySQL"
+    params:
+      userId: 1
+    expected:
+      status_code: 200
+      db_user_exists: true
+      user_name: "Alice"
+      user_phone: "13812345678"
+
+  - case_name: "用户2存在于MySQL"
+    params:
+      userId: 2
+    expected:
+      status_code: 200
+      db_user_exists: true
+      user_name: "Bob"
+      user_phone: "13912345678"
+
+
+  - case_name: "用户999不存在于MySQL且接口无文章"
+    params:
+      userId: 999
+    expected:
+      status_code: 200
+      db_user_exists: false
+      expect_posts: false
