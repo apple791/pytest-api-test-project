@@ -1,11 +1,19 @@
 import os
-import allure
 from datetime import datetime
+
+import allure
 import pytest
 import requests
-from config.config import BASE_URL, HEADERS_URL, BEARER_URL, COOKIES_URL
-from common.db_util import init_demo_db
 from selenium import webdriver
+
+from common.db_util import init_demo_db
+from config.config import (
+    BASE_URL,
+    HEADERS_URL,
+    BEARER_URL,
+    COOKIES_URL
+)
+
 
 # 文章接口地址
 @pytest.fixture
@@ -44,13 +52,13 @@ def api_session():
     return session
 
 
-# 初始化 SQLite测试数据库
+# 初始化 SQLite 测试数据库
 @pytest.fixture
 def init_db():
     init_demo_db()
 
 
-# 创建浏览器实例，用于Selenium UI自动化测试
+# 创建浏览器实例，用于 Selenium UI 自动化测试
 @pytest.fixture
 def browser(request):
     driver = webdriver.Chrome()
@@ -86,11 +94,12 @@ def browser(request):
     driver.quit()
 
 
+# pytest 测试结果钩子：记录测试执行结果，供失败截图和 Allure 附件使用
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
 
     if report.when == "call":
-        setattr(item, "rep_call",report)
+        setattr(item, "rep_call", report)
 

@@ -1,3 +1,16 @@
+"""
+Selenium 页面基类。
+
+封装页面对象中常用的浏览器操作，包括：
+
+- 打开页面；
+- 等待元素可见；
+- 等待元素可点击；
+- 点击元素；
+- 输入文本；
+- 获取元素文本；
+- 获取页面标题和当前 URL。
+"""
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 

@@ -1,3 +1,4 @@
+# MySQL 数据库连接与操作工具。
 import pymysql
 
 from config.config import MYSQL_CONFIG
@@ -31,9 +32,8 @@ def execute_mysql(sql, params=None):
             cursor.execute(sql, params)
             affected_rows = cursor.rowcount
 
-            connection.commit()
-
-            return affected_rows
+        connection.commit()
+        return affected_rows
 
     except Exception:
         connection.rollback()

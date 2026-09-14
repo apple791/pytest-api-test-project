@@ -1,3 +1,4 @@
+# SQLite 数据库初始化与查询工具
 import sqlite3
 
 def query_db(sql, params=None, db_path="demo.db"):

@@ -1,3 +1,4 @@
+# 接口与 MySQL 联合校验测试。
 import json
 import allure
 import pytest

@@ -1,3 +1,4 @@
+# HTTP 请求统一封装、请求重试和响应日志工具
 import requests
 
 def send_request(

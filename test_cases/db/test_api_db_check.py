@@ -1,3 +1,4 @@
+# 接口与 SQLite 数据库联合校验测试。
 import allure
 import pytest
 from common.request_util import send_get_request

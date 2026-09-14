@@ -1,3 +1,5 @@
+# MySQL 用户数据增删改查测试
+# 验证 execute_mysql() 的写入能力和 query_mysql() 的查询能力
 from common.mysql_util import execute_mysql, query_mysql
 
 def test_insert_and_query_mysql_user():
@@ -20,3 +22,4 @@ def test_insert_and_query_mysql_user():
 
     assert len(rows) == 1
     assert rows[0]["name"] == "Charlie"
+    assert rows[0]["phone"] == "13712345678"

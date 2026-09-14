@@ -1,4 +1,16 @@
+"""
+Selenium Web Form 页面对象。
+
+封装 Selenium 官方 Web Form 页面的常用操作，包括：
+
+- 打开 Web Form 页面；
+- 填写文本；
+- 点击提交按钮；
+- 获取输入框内容；
+- 获取提交后的提示信息。
+"""
 from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
 
 class WebFormPage(BasePage):

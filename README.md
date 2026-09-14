@@ -11,6 +11,9 @@
 - **requests**
 - **PyYAML**
 - **pytest-html**
+- **Allure 测试报告**
+- **Selenium Page Object Model**
+- **SQLite 和 MySQL 数据库校验**
 
 ## 技术栈
 
@@ -21,6 +24,9 @@
 - pytest-html
 - Allure
 - Selenium
+- SQLite
+- MySQL
+- PyMySQL
 
 ## 项目结构
 
@@ -55,6 +61,11 @@ api_test_project/
 - 断言失败时打印响应日志，辅助定位问题
 - 请求异常或指定状态码时的重试机制测试
 - 接口响应数据与 SQLite 数据库数据一致性校验
+- 接口响应数据与 MySQL 数据一致性校验
+- MySQL 用户存在和不存在场景校验
+- MySQL 用户 ID、姓名和手机号字段校验
+- Selenium UI 测试数据 YAML 参数化
+- Allure 测试步骤、接口响应和数据库结果附件
 - Selenium UI 自动化测试：填写页面表单并校验提交结果
 - Selenium UI 自动化测试：使用 BasePage + Page Object Model 封装页面操作
 
@@ -120,6 +131,12 @@ pytest -m ui
 pytest -m api_db
 ```
 
+### 运行 MySQL 联合测试
+
+```bash
+pytest -m api_mysql
+```
+
 ### 运行冒烟测试
 
 ```bash
@@ -166,7 +183,7 @@ allure generate reports/allure-results -o reports/allure-report --clean
 - `reports/` 目录用于保存本地测试报告，默认不提交到代码仓库。
 - 接口基础地址和 httpbin 测试地址统一维护在 `config/config.py` 中。
 - 测试数据统一维护在 `data/posts_api_cases.yaml` 中。
-- pytest 会递归搜索 test_cases 目录下的 api、db 和 ui 子目录。
+- pytest 会递归搜索 `test_cases/` 目录下的 `api/`、`db/` 和 `ui/` 子目录。
 - 接口、数据库和 UI 测试分别按功能分层管理。
 
 ## 项目提交前检查
@@ -212,6 +229,9 @@ allure generate reports/allure-results -o reports/allure-report --clean
 - D29: Selenium UI 测试失败自动截图，并将失败截图和页面源码添加到 Allure 报告
 - D30: Selenium UI 测试数据参数化，使用 YAML 管理多组输入场景，并校验页面实际输入值
 - D31: 接口、数据库和 UI 测试目录分层整理，完善 pytest.ini 配置和项目结构
+- D32: Python 接入 MySQL，完成数据库创建、查询、增删改、参数化 SQL 和事务处理
+- D33: 接口自动化结合 MySQL 校验，完成接口与数据库多字段一致性验证，并使用 Allure 展示校验过程
+- D34: 综合项目收尾，整理 README、pytest.ini、requirements.txt、.gitignore 和最终项目结构
 
 
 
