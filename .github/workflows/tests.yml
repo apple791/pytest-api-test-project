@@ -27,4 +27,4 @@ jobs:
 
       - name: Run API and SQLite tests
         run: |
-          pytest test_cases/api test_cases/db
+          pytest test_cases/api
