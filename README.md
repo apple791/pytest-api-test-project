@@ -1,5 +1,17 @@
 # 接口自动化测试项目
 
+## 2026年10月配置与Actions修复
+
+保留原有学习模块和记录，具体修复见 docs/配置与Actions修复说明.md。
+
+- 使用项目自己的.venv解释器，先安装requirements.txt。
+- 默认pytest运行API、临时SQLite和离线检查；MySQL及UI需显式启用。
+- 离线：`python -m pytest test_cases/unit test_cases/config -v`。
+- UI：`python -m pytest test_cases/ui --run-ui --headless -v`，需要Chrome。
+- MySQL：配置独立测试库和.env后，执行`python -m pytest test_cases/db --run-mysql -v`。
+- 本地.github/workflows/tests.yml先检查配置，再测试API及SQLite，失败时也保留报告。
+- SQLite/MySQL为本地学习数据，与公开API真实后端数据库没有连接；相关用例是字段关联练习。
+
 ## 项目简介
 
 本项目是一个基于 **pytest** 和 **requests** 的接口自动化测试练习项目。
@@ -110,19 +122,19 @@ pytest test_cases/api
 ### 运行数据库测试
 
 ```bash
-pytest test_cases/db
+pytest test_cases/db --run-mysql
 ```
 
 ### 运行 UI 测试
 
 ```bash
-pytest test_cases/ui
+pytest test_cases/ui --run-ui --headless
 ```
 
 ### 运行 UI marker 测试
 
 ```bash
-pytest -m ui
+pytest -m ui --run-ui --headless
 ```
 
 ### 运行接口与数据库联合测试
@@ -134,7 +146,7 @@ pytest -m api_db
 ### 运行 MySQL 联合测试
 
 ```bash
-pytest -m api_mysql
+pytest -m api_mysql --run-mysql
 ```
 
 ### 运行冒烟测试

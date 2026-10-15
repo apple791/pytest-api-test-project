@@ -1,8 +1,8 @@
-﻿requests
+requests
 pytest
 PyYAML
 pytest-html
 allure-pytest
 selenium
 PyMySQL
-python-dotenv
+python-dotenv>=1.2,<2

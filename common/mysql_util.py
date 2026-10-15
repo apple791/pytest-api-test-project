@@ -1,9 +1,10 @@
 # MySQL 数据库连接与操作工具。
 import pymysql
 
-from config.config import MYSQL_CONFIG
+from config.config import MYSQL_CONFIG, validate_mysql_environment
 
 def get_mysql_connection():
+    validate_mysql_environment()
     return pymysql.connect(
         host=MYSQL_CONFIG["host"],
         port=MYSQL_CONFIG["port"],

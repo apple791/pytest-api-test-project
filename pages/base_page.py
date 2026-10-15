@@ -45,6 +45,7 @@ class BasePage:
         element.clear()
         element.send_keys(text)
 
+
     def get_text(self, locator):
         element = self.wait_visible(locator)
         return element.text

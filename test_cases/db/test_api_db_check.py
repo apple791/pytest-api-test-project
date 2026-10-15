@@ -36,7 +36,7 @@ def test_get_posts_user_exists_in_db(posts_url, case, init_db):
     user_id = data[0]["userId"]
 
     sql = "select * from users where id = ?"
-    db_users = query_db(sql, (user_id,))
+    db_users = query_db(sql, (user_id,), db_path=init_db)
 
     if expected["db_user_exists"]:
         assert len(db_users) == 1

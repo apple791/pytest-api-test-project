@@ -16,9 +16,9 @@ from pages.base_page import BasePage
 class WebFormPage(BasePage):
     URL = "https://www.selenium.dev/selenium/web/web-form.html"
 
-    TEXT_INPUT = (By.NAME, "my-text")
+    TEXT_INPUT = (By.CSS_SELECTOR, "input[name='my-text']")
     SUBMIT_BUTTON = (By.CSS_SELECTOR, "button")
-    MESSAGE = (By.ID, "message")
+    MESSAGE = (By.CSS_SELECTOR, "#message")
 
     def open(self):
         self.open_url(self.URL)

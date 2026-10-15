@@ -20,7 +20,7 @@ def test_session_save_cookie_from_response(api_session, cookies_url, case):
     cookie_value = case["cookie_value"]
     expected = case["expected"]
 
-    set_cookie_url = f"https://httpbin.org/cookies/set/{cookie_name}/{cookie_value}"
+    set_cookie_url = f"{cookies_url.rstrip('/')}/set/{cookie_name}/{cookie_value}"
 
     set_response = send_get_request(set_cookie_url, session=api_session, timeout=5)
 
